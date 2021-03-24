@@ -1,0 +1,38 @@
+{
+  "tabs": {
+    "home": "pages/tabs/home/index"
+  },
+  "packages": {
+    "pages/packageA": [
+      "pages/my/index",
+      "pages/user/index"
+    ]
+  },
+  "subpackages": [
+    {
+      "root": "pages/packageA",
+      "pages": [
+        "pages/my/index",
+        "pages/user/index"
+      ],
+      "name": "packageA",
+      "independent": true
+    }
+  ],
+  "pages": [
+    "pages/content/index",
+    "pages/tabs/home/index"
+  ],
+  "source": {
+    "content": "pages/content/index",
+    "my": "pages/packageA/pages/my/index",
+    "user": "pages/packageA/pages/user/index",
+    "home": "pages/tabs/home/index"
+  },
+  "names": [
+    "content",
+    "my",
+    "user",
+    "home"
+  ]
+}
