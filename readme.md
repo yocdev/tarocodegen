@@ -44,4 +44,6 @@ $ codegen --help
 2. pages/packages/[packageName]/[routerName]/index.tsx
 3. pages/tabs/[routerName]/index.tsx
 
+**TODO:**
+- [ ] 支持分包预下载配置
 
