@@ -16,6 +16,7 @@
 	"scripts": {
 		"dev": "cross-env NODE_ENV=\"dev\" gulp && dist/cli.js",
 		"build": "cross-env NODE_ENV=\"prod\" gulp",
+		"prepublish": "yarn build",
 		"pretest": "npm run build",
 		"test": "xo && ava",
 		"codegen": "codegen"
