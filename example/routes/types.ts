@@ -1,2 +1,2 @@
-export type RoutesName = "content" | "my" | "user" | "home"
-	
+export type RoutesName = "content" | "center" | "user" | "question" | "home"
+		

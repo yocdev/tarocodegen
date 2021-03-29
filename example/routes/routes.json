@@ -3,36 +3,39 @@
     "home": "pages/tabs/home/index"
   },
   "packages": {
-    "pages/packageA": [
-      "pages/my/index",
-      "pages/user/index"
+    "pages/packages/pkgname": [
+      "center/index",
+      "user/index"
     ]
   },
   "subpackages": [
     {
-      "root": "pages/packageA",
+      "root": "pages/packages/pkgname",
+      "name": "pkgname",
       "pages": [
-        "pages/my/index",
-        "pages/user/index"
+        "center/index",
+        "user/index"
       ],
-      "name": "packageA",
       "independent": true
     }
   ],
   "pages": [
     "pages/content/index",
+    "pages/question/index",
     "pages/tabs/home/index"
   ],
   "source": {
     "content": "pages/content/index",
-    "my": "pages/packageA/pages/my/index",
-    "user": "pages/packageA/pages/user/index",
+    "center": "pages/packages/pkgname/center/index",
+    "user": "pages/packages/pkgname/user/index",
+    "question": "pages/question/index",
     "home": "pages/tabs/home/index"
   },
   "names": [
     "content",
-    "my",
+    "center",
     "user",
+    "question",
     "home"
   ]
 }

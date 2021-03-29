@@ -4,7 +4,6 @@ import rd from "rd";
 import Ajv from "ajv";
 import chalk from "chalk";
 import config from "../config";
-// console.log("检查看下啊", config);
 const packageConfig = {
 	type: "object",
 	properties: {
@@ -16,6 +15,16 @@ const packageConfig = {
 };
 const ajv = new Ajv();
 const pkgConfigValidate = ajv.compile(packageConfig);
+
+const normalRouterReg = /pages\/([a-zA-Z]+)\/index.(tsx|js|ts|jsx)$/;
+const tabRouterReg = /pages\/tabs\/([a-zA-Z]+)\/index.(tsx|js|ts|jsx)$/;
+const packageRouterReg = /pages\/packages\/([a-zA-Z]+)\/([a-zA-Z]+)\/index.(tsx|js|ts|jsx)$/;
+
+enum RouteType {
+	NORMAL = "normal",
+	TAB = "tab",
+	PACKAGE = "package",
+}
 
 export default function generateRoutes() {
 	// 获得当前执行node命令时候的文件夹目录名
@@ -46,8 +55,10 @@ export default function generateRoutes() {
 	rd.eachSync(routesPath, (fileDir, stats) => {
 		// 每找到一个文件都会调用一次此函数
 		// 参数s是通过 fs.stat() 获取到的文件属性值
+		fileDir = fileDir.split(path.sep).join("/");
 		const isFile = stats.isFile(); //是文件
-		if (isFile && isRouter(fileDir)) {
+		const routeType = isRouter(fileDir);
+		if (isFile && routeType) {
 			const name = path.basename(path.dirname(fileDir));
 			const routePath = `pages${fileDir.replace(routesPath, "")}`;
 			if (routes.names.includes(name)) {
@@ -59,17 +70,16 @@ export default function generateRoutes() {
 				if (routePath.includes("tabs")) {
 					routes.tabs[name] = routeUsefulPath;
 				}
-				if (routePath.includes("package")) {
+				if (routePath.includes("packages")) {
+					// const names = fileDir.match(packageRouterReg);
 					const rootKeys = routePath.split(path.sep);
-					const root = rootKeys.slice(0, 2).join(path.sep);
-					const pagePath = rootKeys.slice(2, rootKeys.length).join(path.sep);
+					const root = rootKeys.slice(0, 3).join(path.sep);
+					const pagePath = rootKeys.slice(3, rootKeys.length).join(path.sep);
 					if (Object.keys(routes.packages).indexOf(root) > -1) {
 						routes.packages[root]?.push(removeExtname(pagePath));
 					} else {
 						routes.packages[root] = [removeExtname(pagePath)];
 					}
-					// console.log('检查下啊',root)
-					// routes.packages.push(routePath);
 				} else {
 					routes.pages.push(routeUsefulPath);
 				}
@@ -84,47 +94,70 @@ export default function generateRoutes() {
 		packageRoots.forEach((root) => {
 			const subpackage = {
 				root,
+				name: root.split(path.sep).pop(),
 				pages: routes.packages[root] as string[],
 			};
 			const configPath = path.join(
 				path.resolve(config.routerRoot, "../"),
 				`${root}/config.json`
 			);
-			let pkgConfig = fs.readFileSync(configPath, "utf-8");
+			// 判断配置文件是否存在
 			try {
-				pkgConfig = JSON.parse(pkgConfig);
-			} catch (error) {
-				console.log(chalk.yellow(`分包配置无效:${configPath}`));
+				fs.accessSync(configPath, fs.constants.F_OK);
+				let pkgConfig = fs.readFileSync(configPath, "utf-8");
+				try {
+					pkgConfig = JSON.parse(pkgConfig);
+				} catch (error) {
+					console.log(chalk.yellow(`分包配置无效:${configPath}`));
+				}
+				if (!pkgConfigValidate(pkgConfig)) {
+					console.log(chalk.yellow(`分包配置无效:${configPath}`));
+					console.log(pkgConfigValidate.errors);
+				} else {
+					Object.assign(subpackage, pkgConfig);
+				}
+			} finally {
+				routes.subpackages.push(subpackage);
 			}
-			if (!pkgConfigValidate(pkgConfig)) {
-				console.log(chalk.yellow(`分包配置无效:${configPath}`));
-				console.log(pkgConfigValidate.errors);
-			} else {
-				Object.assign(subpackage, pkgConfig);
-			}
-			routes.subpackages.push(subpackage);
 		});
 	}
-	// 生成 routes.json
+	// 生成 routes.json;注意判断文件存在的话要覆盖写入
 	fs.writeFileSync(
 		path.resolve(config.routerTarget, "./routes.json"),
 		JSON.stringify(routes, null, 2)
 	);
-	fs.writeFileSync(
-		path.resolve(config.routerTarget, "./types.ts"),
-		`export type RoutesName = ${routes.names
-			.map((name) => `"${name}"`)
-			.join(" | ")}
-	`
-	);
+	if (routes.names.length > 0) {
+		fs.writeFileSync(
+			path.resolve(config.routerTarget, "./types.ts"),
+			`export type RoutesName = ${routes.names
+				.map((name) => `"${name}"`)
+				.join(" | ")}
+		`
+		);
+	}
 }
 
 // 判断改路径是否是一个路由路径
-function isRouter(filepath: string) {
+function isRouter(filepath: string): boolean | RouteType {
 	if (!/index.(js|jsx|ts|tsx)/.test(path.basename(filepath))) {
 		return false;
 	}
-	return ["component","components","assets"].every((keyword) => !filepath.includes(keyword));
+
+	if (normalRouterReg.test(filepath)) {
+		return RouteType.NORMAL;
+	}
+
+	if (tabRouterReg.test(filepath)) {
+		return RouteType.TAB;
+	}
+
+	if (packageRouterReg.test(filepath)) {
+		return RouteType.PACKAGE;
+	}
+
+	return false;
+
+	// return ["component","components","assets"].every((keyword) => !filepath.includes(keyword));
 }
 
 // 去掉文件后缀，小程序路由不需要

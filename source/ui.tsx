@@ -10,10 +10,10 @@ const items = [
 		label: "路由",
 		value: "routes",
 	},
-	{
-		label: "图标",
-		value: "icon",
-	},
+	// {
+	// 	label: "图标",
+	// 	value: "icon",
+	// },
 ];
 
 const App: FC<{ type?: string }> = ({ type }) => {
