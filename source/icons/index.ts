@@ -18,12 +18,12 @@ export default function generateIcons() {
 	rd.eachSync(routesPath, (fileDir, stats) => {
 		const isValidPicture =
 			stats.isFile() && /svg|png|jpeg/.test(path.extname(fileDir));
-		console.log(fileDir);
+		// console.log(fileDir);
 		if (isValidPicture) {
 			const name = path.basename(fileDir, path.extname(fileDir));
 			const iconFileName = path.basename(fileDir);
 			// 转换为双驼峰写法
-			const iconName = _.capitalize(_.camelCase(name));
+			const iconName = _.upperFirst(_.camelCase(name));
 			const iconComponentName = `${iconName}Icon`;
 			const code = Handlebars.compile(template)({
 				iconName,
