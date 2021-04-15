@@ -4,6 +4,7 @@ import rd from "rd";
 import Ajv from "ajv";
 import chalk from "chalk";
 import config from "../config";
+
 const packageConfig = {
 	type: "object",
 	properties: {

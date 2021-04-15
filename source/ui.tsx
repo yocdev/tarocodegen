@@ -4,16 +4,17 @@ import SelectInput from "ink-select-input";
 import Spinner from "ink-spinner";
 import chalk from "chalk";
 import generateRoutes from "./routes";
+import generateIcons from "./icons";
 
 const items = [
 	{
 		label: "路由",
 		value: "routes",
 	},
-	// {
-	// 	label: "图标",
-	// 	value: "icon",
-	// },
+	{
+		label: "图标",
+		value: "icons",
+	},
 ];
 
 const App: FC<{ type?: string }> = ({ type }) => {
@@ -27,7 +28,16 @@ const App: FC<{ type?: string }> = ({ type }) => {
 				console.log(chalk.red(error));
 				setProcess("failed");
 			}
+		} else if (item.value === 'icons') {
+			try {
+				generateIcons();
+				setProcess("success");
+			} catch (error) {
+				console.log(chalk.red(error));
+				setProcess("failed");
+			}
 		}
+
 	};
 	const [process, setProcess] = useState<
 		"init" | "processing" | "success" | "failed"
@@ -58,3 +68,5 @@ const App: FC<{ type?: string }> = ({ type }) => {
 
 module.exports = App;
 export default App;
+
+
