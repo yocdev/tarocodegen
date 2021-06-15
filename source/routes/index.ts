@@ -43,6 +43,7 @@ export default function generateRoutes() {
 		pages: string[];
 		source: Record<string, string>;
 		names: string[];
+		customRoutes: Record<string, string>;
 	} = {
 		tabs: {},
 		packages: {},
@@ -50,6 +51,7 @@ export default function generateRoutes() {
 		pages: [],
 		source: {},
 		names: [],
+		customRoutes: {}
 	};
 
 	// 同步遍历目录下的所有文件
@@ -85,6 +87,8 @@ export default function generateRoutes() {
 					routes.pages.push(routeUsefulPath);
 				}
 				routes.source[name] = routeUsefulPath;
+				const shortLink = name.replace(/([A-Z])/g,"-$1").toLowerCase()
+				routes.customRoutes[`/${routeUsefulPath}`] = `/${shortLink}`;
 				routes.names.push(name);
 			}
 		}
