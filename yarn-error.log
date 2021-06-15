@@ -1,35 +1,35 @@
 Arguments: 
-  /Users/ben/.nvm/versions/node/v14.16.0/bin/node /Users/ben/.yarn/bin/yarn.js add @types/node-glob -D
+  /Users/ben/.nvm/versions/node/v14.16.1/bin/node /Users/ben/.nvm/versions/node/v14.16.1/bin/yarn publish
 
 PATH: 
-  /Users/ben/opt/anaconda3/bin:/usr/local/opt/ruby/bin:/Users/ben/.nvm/versions/node/v14.16.0/bin:/Users/ben/.fastlane/bin:/Users/ben/.deno/bin:/Users/ben/Documents/flutter/bin:/usr/local/opt/php/bin:/Users/ben/.yarn/bin:/Users/ben/.config/yarn/global/node_modules/.bin:/Users/ben/Downloads/cocos2d-x-3.16/templates:/Users/ben/Downloads:/Users/ben/Downloads/cocos2d-x-3.16/tools/cocos2d-console/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/share/dotnet:/Library/Apple/usr/bin:/Users/ben/opt/anaconda3/bin:/usr/local/opt/ruby/bin:/Users/ben/.nvm/versions/node/v14.1.0/bin:/Users/ben/.fastlane/bin:/Users/ben/.deno/bin:/Users/ben/Documents/flutter/bin:/usr/local/opt/php/bin:/Users/ben/.yarn/bin:/Users/ben/.config/yarn/global/node_modules/.bin:/Users/ben/Downloads/cocos2d-x-3.16/templates:/Users/ben/Downloads:/Users/ben/Downloads/cocos2d-x-3.16/tools/cocos2d-console/bin:/Users/ben/.cargo/bin:/bin:/bin
+  /Users/ben/.nvm/versions/node/v14.16.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 Yarn version: 
-  1.22.5
+  1.22.10
 
 Node version: 
-  14.16.0
+  14.16.1
 
 Platform: 
   darwin x64
 
 Trace: 
-  Error: https://registry.npmjs.com/@types%2fnode-glob: Not found
-      at Request.params.callback [as _callback] (/Users/ben/.yarn/lib/cli.js:66988:18)
-      at Request.self.callback (/Users/ben/.yarn/lib/cli.js:140749:22)
-      at Request.emit (events.js:315:20)
-      at Request.<anonymous> (/Users/ben/.yarn/lib/cli.js:141721:10)
-      at Request.emit (events.js:315:20)
-      at IncomingMessage.<anonymous> (/Users/ben/.yarn/lib/cli.js:141643:12)
-      at Object.onceWrapper (events.js:421:28)
-      at IncomingMessage.emit (events.js:327:22)
-      at endReadableNT (internal/streams/readable.js:1327:12)
-      at processTicksAndRejections (internal/process/task_queues.js:80:21)
+  Error: canceled
+      at Interface.<anonymous> (/Users/ben/.nvm/versions/node/v14.16.1/lib/node_modules/yarn/lib/cli.js:136216:13)
+      at Interface.emit (events.js:315:20)
+      at Interface._ttyWrite (readline.js:875:16)
+      at ReadStream.onkeypress (readline.js:213:10)
+      at ReadStream.emit (events.js:315:20)
+      at emitKeys (internal/readline/utils.js:345:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1144:36)
+      at ReadStream.emit (events.js:315:20)
+      at addChunk (internal/streams/readable.js:309:12)
 
 npm manifest: 
   {
   	"name": "@redchili/codegen",
-  	"version": "0.2.0",
+  	"version": "0.5.2",
   	"license": "MIT",
   	"private": false,
   	"bin": {
@@ -45,6 +45,7 @@ npm manifest:
   	"scripts": {
   		"dev": "cross-env NODE_ENV=\"dev\" gulp && dist/cli.js",
   		"build": "cross-env NODE_ENV=\"prod\" gulp",
+  		"prepublish": "yarn build",
   		"pretest": "npm run build",
   		"test": "xo && ava",
   		"codegen": "codegen"
@@ -53,12 +54,15 @@ npm manifest:
   		"dist"
   	],
   	"dependencies": {
+  		"@types/lodash": "^4.14.168",
   		"ajv": "^7.2.3",
+  		"handlebars": "^4.7.7",
   		"ink": "^3.0.8",
   		"ink-select-input": "^4.2.0",
   		"ink-spinner": "^4.0.1",
+  		"lodash": "^4.17.21",
   		"meow": "^9.0.0",
-  		"node-glob": "^1.2.0",
+  		"prettier": "^2.2.1",
   		"rd": "^2.0.1",
   		"react": "^17.0.2"
   	},
@@ -413,6 +417,11 @@ Lockfile:
     version "0.0.29"
     resolved "https://registry.npm.taobao.org/@types/json5/download/@types/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
     integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
+  
+  "@types/lodash@^4.14.168":
+    version "4.14.168"
+    resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.168.tgz#fe24632e79b7ade3f132891afff86caa5e5ce008"
+    integrity sha512-oVfRvqHV/V6D1yifJbVRU3TMp8OT6o6BG+U9MkwuJ3U8/CsDHvalRpsxBqivn71ztOFZBTfJMvETbqHiaNSj7Q==
   
   "@types/minimatch@*":
     version "3.0.3"
@@ -897,11 +906,6 @@ Lockfile:
     integrity sha1-HQqRS7Aldb7IqPOnTlCA9yssDGs=
     dependencies:
       async-done "^1.2.2"
-  
-  async@^1.3.0:
-    version "1.5.2"
-    resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
-    integrity sha1-7GphrlZIDAw8skHJVhjiCJL5Zyo=
   
   at-least-node@^1.0.0:
     version "1.0.0"
@@ -2957,11 +2961,6 @@ Lockfile:
       to-absolute-glob "^2.0.0"
       unique-stream "^2.0.2"
   
-  glob-to-regexp@^0.1.0:
-    version "0.1.0"
-    resolved "https://registry.yarnpkg.com/glob-to-regexp/-/glob-to-regexp-0.1.0.tgz#e0369d426578fd456d47dc23b09de05c1da9ea5d"
-    integrity sha1-4DadQmV4/UVtR9wjsJ3gXB2p6l0=
-  
   glob-to-regexp@^0.3.0:
     version "0.3.0"
     resolved "https://registry.npm.taobao.org/glob-to-regexp/download/glob-to-regexp-0.3.0.tgz#8c5a1494d2066c570cc3bfe4496175acc4d502ab"
@@ -2982,8 +2981,8 @@ Lockfile:
   
   glob@^7.1.1, glob@^7.1.3:
     version "7.1.6"
-    resolved "https://registry.npm.taobao.org/glob/download/glob-7.1.6.tgz?cache=0&sync_timestamp=1612268417812&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fglob%2Fdownload%2Fglob-7.1.6.tgz#141f33b81a7c2492e125594307480c46679278a6"
-    integrity sha1-FB8zuBp8JJLhJVlDB0gMRmeSeKY=
+    resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.6.tgz#141f33b81a7c2492e125594307480c46679278a6"
+    integrity sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==
     dependencies:
       fs.realpath "^1.0.0"
       inflight "^1.0.4"
@@ -3154,6 +3153,18 @@ Lockfile:
     integrity sha1-4oxNRdBey77YGDY86PnFkmIp/+U=
     dependencies:
       glogg "^1.0.0"
+  
+  handlebars@^4.7.7:
+    version "4.7.7"
+    resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.7.7.tgz#9ce33416aad02dbd6c8fafa8240d5d98004945a1"
+    integrity sha512-aAcXm5OAfE/8IXkcZvCepKU3VzW1/39Fb5ZuqMtgI/hT8X2YgoMvBY5dLhq/cpOvw7Lk1nK/UF71aLG/ZnVYRA==
+    dependencies:
+      minimist "^1.2.5"
+      neo-async "^2.6.0"
+      source-map "^0.6.1"
+      wordwrap "^1.0.0"
+    optionalDependencies:
+      uglify-js "^3.1.4"
   
   hard-rejection@^2.1.0:
     version "2.1.0"
@@ -4415,18 +4426,15 @@ Lockfile:
     resolved "https://registry.npm.taobao.org/natural-compare/download/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
     integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
   
+  neo-async@^2.6.0:
+    version "2.6.2"
+    resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
+    integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
+  
   next-tick@~1.0.0:
     version "1.0.0"
     resolved "https://registry.npm.taobao.org/next-tick/download/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
     integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
-  
-  node-glob@^1.2.0:
-    version "1.2.0"
-    resolved "https://registry.yarnpkg.com/node-glob/-/node-glob-1.2.0.tgz#5240ffedefc6d663ce8515e5796a4d47a750c0d5"
-    integrity sha1-UkD/7e/G1mPOhRXleWpNR6dQwNU=
-    dependencies:
-      async "^1.3.0"
-      glob-to-regexp "^0.1.0"
   
   "node-libs-browser@^1.0.0 || ^2.0.0":
     version "2.2.1"
@@ -5090,8 +5098,8 @@ Lockfile:
   
   prettier@^2.2.1:
     version "2.2.1"
-    resolved "https://registry.npm.taobao.org/prettier/download/prettier-2.2.1.tgz?cache=0&sync_timestamp=1606523905262&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fprettier%2Fdownload%2Fprettier-2.2.1.tgz#795a1a78dd52f073da0cd42b21f9c91381923ff5"
-    integrity sha1-eVoaeN1S8HPaDNQrIfnJE4GSP/U=
+    resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.2.1.tgz#795a1a78dd52f073da0cd42b21f9c91381923ff5"
+    integrity sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==
   
   pretty-hrtime@^1.0.0:
     version "1.0.3"
@@ -5818,7 +5826,7 @@ Lockfile:
     resolved "https://registry.npm.taobao.org/source-map/download/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
     integrity sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=
   
-  source-map@^0.6.0:
+  source-map@^0.6.0, source-map@^0.6.1:
     version "0.6.1"
     resolved "https://registry.npm.taobao.org/source-map/download/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
     integrity sha1-dHIq8y6WFOnCh6jQu95IteLxomM=
@@ -6355,6 +6363,11 @@ Lockfile:
     resolved "https://registry.npm.taobao.org/typescript/download/typescript-4.2.3.tgz?cache=0&sync_timestamp=1616495395520&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftypescript%2Fdownload%2Ftypescript-4.2.3.tgz#39062d8019912d43726298f09493d598048c1ce3"
     integrity sha1-OQYtgBmRLUNyYpjwlJPVmASMHOM=
   
+  uglify-js@^3.1.4:
+    version "3.13.4"
+    resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.13.4.tgz#592588bb9f47ae03b24916e2471218d914955574"
+    integrity sha512-kv7fCkIXyQIilD5/yQy8O+uagsYIOt5cZvs890W40/e/rvjMSzJw81o9Bg0tkURxzZBROtDQhW2LFjOGoK3RZw==
+  
   unbox-primitive@^1.0.0:
     version "1.0.0"
     resolved "https://registry.npm.taobao.org/unbox-primitive/download/unbox-primitive-1.0.0.tgz?cache=0&sync_timestamp=1614659020601&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Funbox-primitive%2Fdownload%2Funbox-primitive-1.0.0.tgz#eeacbc4affa28e9b3d36b5eaeccc50b3251b1d3f"
@@ -6636,6 +6649,11 @@ Lockfile:
     version "1.2.3"
     resolved "https://registry.npm.taobao.org/word-wrap/download/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"
     integrity sha1-YQY29rH3A4kb00dxzLF/uTtHB5w=
+  
+  wordwrap@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"
+    integrity sha1-J1hIEIkUVqQXHI0CJkQa3pDLyus=
   
   wrap-ansi@^2.0.0:
     version "2.1.0"
