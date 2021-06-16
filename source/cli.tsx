@@ -7,13 +7,13 @@ import App from "./ui";
 const cli = meow(
 	`
 	Usage
-	  $ codegen
+	  $ tarocodegen
 
 	Options
 		--type  component type
 
 	Examples
-	  $ codegen --type routes
+	  $ tarocodegen --type routes
 
 `,
 	{

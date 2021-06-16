@@ -1,17 +1,17 @@
 {
-	"name": "@redchili/codegen",
-	"version": "0.5.2",
+	"name": "@yocdev/tarocodegen",
+	"version": "1.0.0",
 	"license": "MIT",
 	"private": false,
 	"bin": {
-		"codegen": "dist/cli.js"
+		"tarocodegen": "dist/cli.js"
 	},
 	"engines": {
 		"node": ">=10"
 	},
-	"homepage": "https://github.com/xiamu14/codegen.git",
+	"homepage": "https://github.com/yocdev/tarocodegen.git",
 	"repository": {
-		"github": "https://github.com/xiamu14/codegen.git"
+		"github": "https://github.com/yocdev/tarocodegen.git"
 	},
 	"scripts": {
 		"dev": "cross-env NODE_ENV=\"dev\" gulp && dist/cli.js",
@@ -19,7 +19,7 @@
 		"prepublish": "yarn build",
 		"pretest": "npm run build",
 		"test": "xo && ava",
-		"codegen": "codegen"
+		"tarocodegen": "tarocodegen"
 	},
 	"files": [
 		"dist"

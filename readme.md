@@ -1,26 +1,26 @@
-# codegen
+# tarocodegen
 
 > 用于自动生成项目里那些逻辑重复的中间层代码
 
 ## Install
 
 ```bash
-$ yarn add @redchili/codegen
+$ yarn add @yocdev/tarocodegen
 ```
 
 ## CLI
 
 ```
-$ codegen --help
+$ tarocodegen --help
 
   Usage
-    $ codegen
+    $ tarocodegen
 
   Options
     --type  生成类型[router]
 
   Examples
-    $ codegen --type=router
+    $ tarocodegen --type=router
 ```
 
 ## 类型
