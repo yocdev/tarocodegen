@@ -1,18 +1,22 @@
 {
 	"name": "@yocdev/tarocodegen",
 	"version": "1.0.0",
+	"author": "npm@youchai.me",
 	"license": "MIT",
-	"private": false,
 	"bin": {
 		"tarocodegen": "dist/cli.js"
 	},
 	"engines": {
 		"node": ">=10"
 	},
-	"homepage": "https://github.com/yocdev/tarocodegen.git",
-	"repository": {
-		"github": "https://github.com/yocdev/tarocodegen.git"
-	},
+	"homepage": "https://github.com/yocdev/tarocodegen#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yocdev/tarocodegen.git"
+  },
+	"bugs": {
+    "url": "https://github.com/yocdev/tarocodegen/issues"
+  },
 	"scripts": {
 		"dev": "cross-env NODE_ENV=\"dev\" gulp && dist/cli.js",
 		"build": "cross-env NODE_ENV=\"prod\" gulp",
