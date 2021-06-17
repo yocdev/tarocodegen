@@ -9,11 +9,11 @@ gulp.task("default", function () {
 		.src()
 		.pipe(tsProject())
 		.js.pipe(replace("process.env.NODE_ENV", `"${process.env.NODE_ENV}"`))
-		.pipe(gulp.dest("lib"));
+		.pipe(gulp.dest("dist"));
 });
 
 function copy() {
 	return gulp
 		.src("source/**/*.handlebars")
-		.pipe(gulp.dest("lib/"));
+		.pipe(gulp.dest("dist/"));
 }
