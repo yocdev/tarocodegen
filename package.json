@@ -1,6 +1,6 @@
 {
 	"name": "@yocdev/tarocodegen",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"author": "npm@youchai.me",
 	"license": "MIT",
 	"bin": {
