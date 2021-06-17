@@ -1,0 +1,17 @@
+import React from 'react'
+import { Image } from '@tarojs/components'
+import { ImageProps } from '@tarojs/components/types/Image'
+import {{iconName}} from './source/{{iconFileName}}'
+
+interface Props extends Omit<ImageProps, 'src'> {
+  width?: string
+  height?: string
+}
+
+const {{iconComponentName}} = React.memo((props: Props) => {
+  const { width = '40px', height = '40px' } = props
+
+  return <Image src={ {{iconName}} } {...props} style={ { width, height } }></Image>
+})
+
+export default {{iconComponentName}}

@@ -4,7 +4,7 @@
 	"author": "npm@youchai.me",
 	"license": "MIT",
 	"bin": {
-		"tarocodegen": "dist/cli.js"
+		"tarocodegen": "lib/cli.js"
 	},
 	"engines": {
 		"node": ">=10"
@@ -18,13 +18,14 @@
     "url": "https://github.com/yocdev/tarocodegen/issues"
   },
 	"scripts": {
-		"dev": "cross-env NODE_ENV=\"dev\" gulp && dist/cli.js",
+		"dev": "cross-env NODE_ENV=\"dev\" gulp && lib/cli.js",
 		"build": "cross-env NODE_ENV=\"prod\" gulp",
 		"test": "xo && ava",
 		"tarocodegen": "tarocodegen"
 	},
 	"files": [
-		"dist"
+		"dist",
+		"lib"
 	],
 	"dependencies": {
 		"@types/lodash": "^4.14.168",
