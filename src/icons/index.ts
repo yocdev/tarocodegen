@@ -4,15 +4,28 @@ import rd from "rd";
 import Handlebars from "handlebars";
 import _ from "lodash";
 import prettier from "prettier";
-import config from "../config";
 
+import readConfig from "../helper/readConfig";
+import chalk from "chalk";
+
+const config = readConfig();
+console.log(config);
 export default function generateIcons() {
 	// 获得当前执行node命令时候的文件夹目录名
 	const commandPath = process.cwd();
-	const template = fs.readFileSync(
+
+	let template = fs.readFileSync(
 		path.join(__dirname, "./template/taro.handlebars"),
 		"utf-8"
 	);
+	if (config.templateFile) {
+		const relativePath = path.join(commandPath, config.templateFile);
+		try {
+			template = fs.readFileSync(relativePath, "utf-8");
+		} catch (error) {
+			console.log(chalk.red(`🔥 图标模板文件不存在 `), relativePath);
+		}
+	}
 	const routesPath = path.resolve(commandPath, config.iconRoot);
 	// 同步遍历目录下的所有文件
 	rd.eachSync(routesPath, (fileDir, stats) => {

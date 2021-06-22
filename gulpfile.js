@@ -14,6 +14,6 @@ gulp.task("default", function () {
 
 function copy() {
 	return gulp
-		.src("source/**/*.handlebars")
+		.src("src/**/*.handlebars")
 		.pipe(gulp.dest("dist/"));
 }

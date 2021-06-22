@@ -1,0 +1,5 @@
+{
+	"iconRoot": "./example/icon/source",
+	"iconTarget": "./example/icon",
+	"templateFile": "./.codegen/templates/icon.handlebars"
+}
