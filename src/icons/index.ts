@@ -37,7 +37,7 @@ export default function generateIcons() {
 			const iconFileName = path.basename(fileDir);
 			// 转换为双驼峰写法
 			const iconName = _.upperFirst(_.camelCase(name));
-			const iconComponentName = `${iconName}Icon`;
+			const iconComponentName = `Icon${iconName}`;
 			const code = Handlebars.compile(template)({
 				iconName,
 				iconFileName,
