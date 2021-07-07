@@ -9,7 +9,6 @@ const packageConfig = {
 	type: "object",
 	properties: {
 		name: { type: "string" },
-
 		independent: { type: "boolean" },
 	},
 	additionalProperties: false,
@@ -42,6 +41,7 @@ export default function generateRoutes() {
 		}[];
 		pages: string[];
 		source: Record<string, string>;
+		fullSource: Record<string, string>;
 		names: string[];
 		customRoutes: Record<string, string>;
 	} = {
@@ -50,8 +50,9 @@ export default function generateRoutes() {
 		subpackages: [],
 		pages: [],
 		source: {},
+		fullSource: {},
 		names: [],
-		customRoutes: {}
+		customRoutes: {},
 	};
 
 	// 同步遍历目录下的所有文件
@@ -70,6 +71,7 @@ export default function generateRoutes() {
 				);
 			} else {
 				const routeUsefulPath = removeExtname(routePath);
+
 				if (routePath.includes("tabs")) {
 					routes.tabs[name] = routeUsefulPath;
 				}
@@ -87,9 +89,11 @@ export default function generateRoutes() {
 					routes.pages.push(routeUsefulPath);
 				}
 				routes.source[name] = routeUsefulPath;
-				const shortLink = name.replace(/([A-Z])/g,"-$1").toLowerCase()
+				routes.fullSource[name] = `/${routeUsefulPath}`;
+				const shortLink = name.replace(/([A-Z])/g, "-$1").toLowerCase();
 				routes.customRoutes[`/${routeUsefulPath}`] = `/${shortLink}`;
 				routes.names.push(name);
+				routes.pages = moveHomeToFirst(routes.pages)
 			}
 		}
 	});
@@ -168,4 +172,21 @@ function isRouter(filepath: string): boolean | RouteType {
 // 去掉文件后缀，小程序路由不需要
 function removeExtname(filepath: string) {
 	return filepath.replace(path.extname(filepath), "");
+}
+
+// 入口页面置顶
+// @ts-ignore
+function moveHomeToFirst(pages: string[]) {
+	const pagesCopy = pages
+	const homeObject = pages.filter((it) =>
+		/home|Home/.test(it)
+	);
+	if (homeObject.length > 0) {
+		const homeIndex = pages.indexOf(homeObject[0] as string)
+		if (homeIndex !== 0) {
+			pagesCopy.splice(homeIndex,1)
+			pagesCopy.unshift(homeObject[0] as string);
+		}
+	}
+	return pagesCopy
 }

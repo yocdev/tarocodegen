@@ -1,6 +1,6 @@
 {
   "tabs": {
-    "home": "pages/tabs/home/index"
+    "Home": "pages/tabs/Home/index"
   },
   "packages": {
     "pages/packages/pkgname": [
@@ -20,29 +20,36 @@
     }
   ],
   "pages": [
+    "pages/tabs/Home/index",
     "pages/content/index",
-    "pages/question/index",
-    "pages/tabs/home/index"
+    "pages/question/index"
   ],
   "source": {
     "content": "pages/content/index",
     "center": "pages/packages/pkgname/center/index",
     "user": "pages/packages/pkgname/user/index",
     "question": "pages/question/index",
-    "home": "pages/tabs/home/index"
+    "Home": "pages/tabs/Home/index"
+  },
+  "fullSource": {
+    "content": "/pages/content/index",
+    "center": "/pages/packages/pkgname/center/index",
+    "user": "/pages/packages/pkgname/user/index",
+    "question": "/pages/question/index",
+    "Home": "/pages/tabs/Home/index"
   },
   "names": [
     "content",
     "center",
     "user",
     "question",
-    "home"
+    "Home"
   ],
   "customRoutes": {
     "/pages/content/index": "/content",
     "/pages/packages/pkgname/center/index": "/center",
     "/pages/packages/pkgname/user/index": "/user",
     "/pages/question/index": "/question",
-    "/pages/tabs/home/index": "/home"
+    "/pages/tabs/Home/index": "/-home"
   }
 }
