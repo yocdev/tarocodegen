@@ -41,7 +41,7 @@ export default function generateRoutes() {
 		}[];
 		pages: string[];
 		source: Record<string, string>;
-		fullSource: Record<string, string>;
+		routeMap: Record<string, string>;
 		names: string[];
 		customRoutes: Record<string, string>;
 	} = {
@@ -50,7 +50,7 @@ export default function generateRoutes() {
 		subpackages: [],
 		pages: [],
 		source: {},
-		fullSource: {},
+		routeMap: {},
 		names: [],
 		customRoutes: {},
 	};
@@ -89,7 +89,7 @@ export default function generateRoutes() {
 					routes.pages.push(routeUsefulPath);
 				}
 				routes.source[name] = routeUsefulPath;
-				routes.fullSource[name] = `/${routeUsefulPath}`;
+				routes.routeMap[name] = `/${routeUsefulPath}`;
 				const shortLink = name.replace(/([A-Z])/g, "-$1").toLowerCase();
 				routes.customRoutes[`/${routeUsefulPath}`] = `/${shortLink}`;
 				routes.names.push(name);
