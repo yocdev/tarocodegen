@@ -8,10 +8,10 @@ interface Props extends Omit<ImageProps, "src"> {
   height?: string;
 }
 
-const ArtIcon = React.memo((props: Props) => {
+const IconArt = React.memo((props: Props) => {
   const { width = "40px", height = "40px" } = props;
 
   return <Image src={Art} {...props} style={{ width, height }}></Image>;
 });
 
-export default ArtIcon;
+export default IconArt;

@@ -1,0 +1,13 @@
+import React from 'react'
+import { Image } from '@tarojs/components'
+import { ImageProps } from '@tarojs/components/types/Image'
+import {{iconName}} from './source/{{iconFileName}}'
+
+type IconProps = Omit<ImageProps, "src">
+
+const {{iconComponentName}} = React.memo((props: IconProps) => {
+
+  return <Image {...props} src={ {{iconName}} } ></Image>
+})
+
+export default {{iconComponentName}}

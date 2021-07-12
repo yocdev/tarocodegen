@@ -9,6 +9,25 @@ const configSchema = {
 		iconRoot: { type: "string" },
 		iconTarget: { type: "string" },
 		templateFile: { type: "string" },
+		prefix: {type: 'string'},
+		svgr: {
+			type: "object",
+			properties: {
+				platform: { type: "array", items: { type: "string" } },
+				filter: { type: "string" },
+			},
+			required: ["platform"],
+		},
+		templates: {
+			type: "array",
+			items: {
+				type: "object",
+				properties: {
+					fileType: { type: "string" },
+					templateFile: { type: "string" },
+				},
+			},
+		},
 	},
 	additionalProperties: false,
 };
