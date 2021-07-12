@@ -142,6 +142,7 @@ const svgrGenerator = async (fileDir: string, componentName: string) => {
 				replaceAttrValues: {
 					"#000": "{props.color}",
 					"#000000": "{props.color}",
+					currentColor: "{props.color}",
 				},
 				plugins: [
 					"@svgr/plugin-svgo",
