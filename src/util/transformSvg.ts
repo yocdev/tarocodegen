@@ -11,7 +11,20 @@ function loadSvg() {
 	console.log(svgCode);
 	svgr(
 		svgCode,
-		{ native: true, dimensions: true },
+		{
+			native: true,
+			dimensions: false,
+			replaceAttrValues: {
+				"#000": "{props.color}",
+				"#000000": "{props.color}",
+				currentColor: "{props.color}",
+			},
+			plugins: [
+				"@svgr/plugin-svgo",
+				"@svgr/plugin-jsx",
+				"@svgr/plugin-prettier",
+			],
+		},
 		{ componentName: "MyComponent" }
 	).then((jsCode: string) => {
 		console.log("--js", jsCode);

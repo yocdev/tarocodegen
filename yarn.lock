@@ -372,16 +372,16 @@
 
 "@svgr/plugin-prettier@^5.5.0":
   version "5.5.0"
-  resolved "https://registry.npmjs.org/@svgr/plugin-prettier/-/plugin-prettier-5.5.0.tgz"
-  integrity sha512-mVc+u+eKUmy8sW5UnFpes9NqVtizJfnhasF8Srbi3XdxVTWyU5lmhWlQAgHLhcrsZKowQ0b7xBa4qWHI5Ew/VQ==
+  resolved "https://registry.nlark.com/@svgr/plugin-prettier/download/@svgr/plugin-prettier-5.5.0.tgz#6c5cc8100f0c895f356d24d523f6ea5165b75366"
+  integrity sha1-bFzIEA8MiV81bSTVI/bqUWW3U2Y=
   dependencies:
     deepmerge "^4.2.2"
     prettier "^2.1.2"
 
 "@svgr/plugin-svgo@^5.5.0":
   version "5.5.0"
-  resolved "https://registry.npmjs.org/@svgr/plugin-svgo/-/plugin-svgo-5.5.0.tgz"
-  integrity sha512-r5swKk46GuQl4RrVejVwpeeJaydoxkdwkM1mBKOgJLBUJPGaLci6ylg/IjhrRsREKDkr4kbMWdgOtbXEh0fyLQ==
+  resolved "https://registry.npm.taobao.org/@svgr/plugin-svgo/download/@svgr/plugin-svgo-5.5.0.tgz#02da55d85320549324e201c7b2e53bf431fcc246"
+  integrity sha1-AtpV2FMgVJMk4gHHsuU79DH8wkY=
   dependencies:
     cosmiconfig "^7.0.0"
     deepmerge "^4.2.2"
