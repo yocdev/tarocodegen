@@ -10,13 +10,13 @@
 		"node": ">=10"
 	},
 	"homepage": "https://github.com/yocdev/tarocodegen#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yocdev/tarocodegen.git"
-  },
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/yocdev/tarocodegen.git"
+	},
 	"bugs": {
-    "url": "https://github.com/yocdev/tarocodegen/issues"
-  },
+		"url": "https://github.com/yocdev/tarocodegen/issues"
+	},
 	"scripts": {
 		"dev": "cross-env NODE_ENV=\"dev\" gulp && dist/cli.js",
 		"build": "cross-env NODE_ENV=\"prod\" gulp",

@@ -1,5 +1,9 @@
 {
-	"iconRoot": "./example/icon/source",
-	"iconTarget": "./example/icon",
-	"templateFile": "./.codegen/templates/icon.handlebars"
+	"iconRoot": "./example/icons/source",
+	"iconTarget": "./example/icons",
+	"templateFile": "./.codegen/templates/icon.handlebars",
+	"templates": [{
+		"fileType": "svg",
+		"templateFile": "./.codegen/templates/icon-svg.handlebars"
+	}]
 }

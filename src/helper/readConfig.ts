@@ -9,6 +9,16 @@ const configSchema = {
 		iconRoot: { type: "string" },
 		iconTarget: { type: "string" },
 		templateFile: { type: "string" },
+		templates: {
+			type: 'array',
+			items: {
+				type: "object",
+				properties: {
+					fileType: {type:'string'},
+					templateFile: {type: 'string'}
+				}
+			}
+		}
 	},
 	additionalProperties: false,
 };
