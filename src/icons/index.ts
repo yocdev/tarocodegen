@@ -55,7 +55,7 @@ export default function generateIcons() {
 	rd.eachSync(routesPath, async (fileDir, stats) => {
 		const extname = path.extname(fileDir);
 		const isValidPicture =
-			stats.isFile() && /svg|png|jpeg/.test(path.extname(fileDir));
+			stats.isFile() && /svg|png|jpeg/.test(path.extname(fileDir)) && !/@[23]x/.test(fileDir);
 		// console.log(fileDir);
 		if (isValidPicture) {
 			const name = path.basename(fileDir, path.extname(fileDir));
