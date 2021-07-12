@@ -55,14 +55,18 @@ export default function generateIcons() {
 	rd.eachSync(routesPath, async (fileDir, stats) => {
 		const extname = path.extname(fileDir);
 		const isValidPicture =
-			stats.isFile() && /svg|png|jpeg/.test(path.extname(fileDir)) && !/@[23]x/.test(fileDir);
+			stats.isFile() &&
+			/svg|png|jpeg/.test(path.extname(fileDir)) &&
+			!/@[23]x/.test(fileDir);
 		// console.log(fileDir);
 		if (isValidPicture) {
 			const name = path.basename(fileDir, path.extname(fileDir));
 			const iconFileName = path.basename(fileDir);
 			// 转换为双驼峰写法
 			const iconName = _.upperFirst(_.camelCase(name));
-			const iconComponentName = `Icon${iconName}`;
+			const iconComponentName = config.prefix
+				? `${config.prefix}${iconName}`
+				: iconName;
 			let finalTemplate = template;
 			if (templates.length > 0) {
 				templates.some((item) => {

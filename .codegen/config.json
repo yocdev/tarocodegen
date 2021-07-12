@@ -2,6 +2,7 @@
 	"iconRoot": "./example/icons/source",
 	"iconTarget": "./example/icons",
 	"templateFile": "./.codegen/templates/icon.handlebars",
+	"prefix": "Icon",
 	"svgr": {
 		"platform": ["rn", "h5"]
 	},
