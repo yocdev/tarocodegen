@@ -1,6 +1,6 @@
 {
 	"name": "@yocdev/tarocodegen",
-	"version": "1.1.4",
+	"version": "1.1.5",
 	"author": "npm@youchai.me",
 	"license": "MIT",
 	"bin": {
@@ -24,7 +24,8 @@
 		"tarocodegen": "tarocodegen"
 	},
 	"files": [
-		"dist"
+		"dist",
+		".svgorc.js"
 	],
 	"dependencies": {
 		"@svgr/core": "^5.5.0",
