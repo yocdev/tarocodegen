@@ -1,4 +1,5 @@
 import path from "path";
+import { nodeEnv } from "./env";
 export interface Config {
 	routerRoot: string;
 	routerTarget: string;
@@ -20,8 +21,6 @@ const configs: Record<string, Config> = {
 		iconTarget: path.join("./src", "components/icon"),
 	},
 };
-// @ts-ignore
-const nodeEnv = process.env.NODE_ENV || "dev";
 const config = configs[nodeEnv] as Config;
 
 export const addToConfig = (configPart: any) => {

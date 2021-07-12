@@ -2,8 +2,13 @@
 	"iconRoot": "./example/icons/source",
 	"iconTarget": "./example/icons",
 	"templateFile": "./.codegen/templates/icon.handlebars",
-	"templates": [{
-		"fileType": "svg",
-		"templateFile": "./.codegen/templates/icon-svg.handlebars"
-	}]
+	"svgr": {
+		"platform": ["rn", "h5"]
+	},
+	"templates": [
+		{
+			"fileType": "svg",
+			"templateFile": "./.codegen/templates/icon-svg.handlebars"
+		}
+	]
 }

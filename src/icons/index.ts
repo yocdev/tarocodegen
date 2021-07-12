@@ -4,15 +4,20 @@ import rd from "rd";
 import Handlebars from "handlebars";
 import _ from "lodash";
 import prettier from "prettier";
+import svgr from "@svgr/core";
+import glob from "glob-promise";
 
 import readConfig from "../helper/readConfig";
 import chalk from "chalk";
+import { nodeEnv } from "../config/env";
 
 const config = readConfig();
-console.log(config);
+if (nodeEnv === "dev") {
+	console.log(config);
+}
+const commandPath = process.cwd();
 export default function generateIcons() {
 	// 获得当前执行node命令时候的文件夹目录名
-	const commandPath = process.cwd();
 
 	let template = fs.readFileSync(
 		path.join(__dirname, "./template/taro.handlebars"),
@@ -47,7 +52,7 @@ export default function generateIcons() {
 	}
 	const routesPath = path.resolve(commandPath, config.iconRoot);
 	// 同步遍历目录下的所有文件
-	rd.eachSync(routesPath, (fileDir, stats) => {
+	rd.eachSync(routesPath, async (fileDir, stats) => {
 		const extname = path.extname(fileDir);
 		const isValidPicture =
 			stats.isFile() && /svg|png|jpeg/.test(path.extname(fileDir));
@@ -69,22 +74,17 @@ export default function generateIcons() {
 					return false;
 				});
 			}
-			// const code = Handlebars.compile(finalTemplate)({
-			// 	iconName,
-			// 	iconFileName,
-			// 	iconComponentName,
-			// });
-			// const formatCode = prettierFormat(code);
-			// const iconPath = path.join(
-			// 	config.iconTarget,
-			// 	`/${iconComponentName}.tsx`
-			// );
-			// fs.writeFileSync(iconPath, formatCode, "utf-8");
-			generator(finalTemplate, iconComponentName,{
-				iconName,
-				iconFileName,
-				iconComponentName,
-			})
+			let skipGenerator = false;
+			if (config.svgr && /svg/.test(extname)) {
+				skipGenerator = await svgrGenerator(fileDir, iconComponentName);
+			}
+			if (!skipGenerator) {
+				generator(finalTemplate, iconComponentName, {
+					iconName,
+					iconFileName,
+					iconComponentName,
+				});
+			}
 		}
 	});
 }
@@ -108,4 +108,51 @@ const generator = (
 	const formatCode = prettierFormat(code);
 	const iconPath = path.join(config.iconTarget, `/${fileName}.tsx`);
 	fs.writeFileSync(iconPath, formatCode, "utf-8");
+};
+
+const svgrGenerator = async (fileDir: string, componentName: string) => {
+	// TODO: 判断是否被过滤
+	if (config.svgr.filter) {
+		try {
+			const files = await glob(config.svgr.filter);
+			const skip = files.some((file) => {
+				const absoluteFilePath = path.resolve(commandPath, file);
+				return absoluteFilePath === fileDir;
+			});
+			if (skip) {
+				return !skip;
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	// TODO: 读取文件数据
+	const svgCode = fs.readFileSync(fileDir, "utf-8");
+	config.svgr.platform.forEach((platform: string) => {
+		svgr(
+			svgCode,
+			{
+				native: platform === "rn",
+				replaceAttrValues: {
+					"#000": "{props.color}",
+					"#000000": "{props.color}",
+				},
+				plugins: [
+					"@svgr/plugin-svgo",
+					"@svgr/plugin-jsx",
+					"@svgr/plugin-prettier",
+				],
+			},
+			{ componentName: componentName }
+		).then((code: string) => {
+			const iconBaseName =
+				platform === "h5"
+					? `${componentName}.tsx`
+					: `${componentName}.${platform}.tsx`;
+			const iconPath = path.join(config.iconTarget, `/${iconBaseName}`);
+			fs.writeFileSync(iconPath, code, "utf-8");
+		});
+	});
+	return true;
 };
