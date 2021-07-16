@@ -158,7 +158,7 @@ const svgrGenerator = async (fileDir: string, componentName: string) => {
 					? `${componentName}.tsx`
 					: `${componentName}.${platform}.tsx`;
 			const iconPath = path.join(config.iconTarget, `/${iconBaseName}`);
-			fs.writeFileSync(iconPath, code, "utf-8");
+			fs.writeFileSync(iconPath, prettierFormat(code), "utf-8");
 		});
 	});
 	return true;

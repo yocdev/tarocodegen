@@ -31,7 +31,7 @@
     "question": "pages/question/index",
     "Home": "pages/tabs/Home/index"
   },
-  "fullSource": {
+  "routeMap": {
     "content": "/pages/content/index",
     "center": "/pages/packages/pkgname/center/index",
     "user": "/pages/packages/pkgname/user/index",
