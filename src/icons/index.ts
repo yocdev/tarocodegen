@@ -98,6 +98,7 @@ const prettierFormat = (content: string) => {
 		printWidth: 120,
 		tabWidth: 2,
 		trailingComma: "all",
+		semi: false,
 		parser: "typescript",
 	};
 	return prettier.format(content, options);
