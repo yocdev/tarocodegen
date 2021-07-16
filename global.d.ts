@@ -1,2 +1,2 @@
-declare module 'prettier'
-declare module '@svgr/core'
+declare module "prettier";
+declare module "@svgr/core";

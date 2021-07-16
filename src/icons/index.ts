@@ -139,9 +139,11 @@ const svgrGenerator = async (fileDir: string, componentName: string) => {
 			svgCode,
 			{
 				native: platform === "rn",
+				dimensions: false,
 				replaceAttrValues: {
 					"#000": "{props.color}",
 					"#000000": "{props.color}",
+					currentColor: "{props.color}",
 				},
 				plugins: [
 					"@svgr/plugin-svgo",
