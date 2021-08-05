@@ -10,7 +10,7 @@ const cli = meow(
 	  $ tarocodegen
 
 	Options
-		--type  component type
+		--type  command type [routes, icons, all]
 
 	Examples
 	  $ tarocodegen --type routes

@@ -28,7 +28,7 @@ const App: FC<{ type?: string }> = ({ type }) => {
 				console.log(chalk.red(error));
 				setProcess("failed");
 			}
-		} else if (item.value === 'icons') {
+		} else if (item.value === "icons") {
 			try {
 				generateIcons();
 				setProcess("success");
@@ -37,14 +37,41 @@ const App: FC<{ type?: string }> = ({ type }) => {
 				setProcess("failed");
 			}
 		}
-
 	};
 	const [process, setProcess] = useState<
 		"init" | "processing" | "success" | "failed"
-	>("init");
+	>();
 	useEffect(() => {
 		if (type) {
 			setProcess("processing");
+			if (type === "routes") {
+				try {
+					generateRoutes();
+					setProcess("success");
+				} catch (error) {
+					console.log(chalk.red(error));
+					setProcess("failed");
+				}
+			} else if (type === "icons") {
+				try {
+					generateIcons();
+					setProcess("success");
+				} catch (error) {
+					console.log(chalk.red(error));
+					setProcess("failed");
+				}
+			} else if (type === "all") {
+				try {
+					generateRoutes();
+					generateIcons();
+					setProcess("success");
+				} catch (error) {
+					console.log(chalk.red(error));
+					setProcess("failed");
+				}
+			}
+		} else {
+			setProcess("init");
 		}
 	}, []);
 	return (
@@ -68,5 +95,3 @@ const App: FC<{ type?: string }> = ({ type }) => {
 
 module.exports = App;
 export default App;
-
-
