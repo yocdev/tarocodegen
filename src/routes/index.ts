@@ -4,6 +4,7 @@ import rd from "rd";
 import Ajv from "ajv";
 import chalk from "chalk";
 import config from "../config";
+import readConfig from "../helper/readConfig";
 
 const packageConfig = {
 	type: "object",
@@ -18,13 +19,16 @@ const pkgConfigValidate = ajv.compile(packageConfig);
 
 const normalRouterReg = /pages\/([a-zA-Z]+)\/index.(tsx|js|ts|jsx)$/;
 const tabRouterReg = /pages\/tabs\/([a-zA-Z]+)\/index.(tsx|js|ts|jsx)$/;
-const packageRouterReg = /pages\/packages\/([a-zA-Z]+)\/([a-zA-Z]+)\/index.(tsx|js|ts|jsx)$/;
+const packageRouterReg =
+	/pages\/packages\/([a-zA-Z]+)\/([a-zA-Z]+)\/index.(tsx|js|ts|jsx)$/;
 
 enum RouteType {
 	NORMAL = "normal",
 	TAB = "tab",
 	PACKAGE = "package",
 }
+
+const extraConfig = readConfig();
 
 export default function generateRoutes() {
 	// 获得当前执行node命令时候的文件夹目录名
@@ -91,10 +95,11 @@ export default function generateRoutes() {
 				routes.source[name] = routeUsefulPath;
 				routes.routeMap[name] = `/${routeUsefulPath}`;
 				const shortLink = name.replace(/([A-Z])/g, "-$1").toLowerCase();
-				routes.customRoutes[`/${routeUsefulPath}`] =
-					`/${shortLink.startsWith('-') ? shortLink.slice(1) : shortLink}`;
+				routes.customRoutes[`/${routeUsefulPath}`] = `/${
+					shortLink.startsWith("-") ? shortLink.slice(1) : shortLink
+				}`;
 				routes.names.push(name);
-				routes.pages = moveHomeToFirst(routes.pages)
+				routes.pages = moveHomeToFirst(routes.pages, extraConfig.routerEntry);
 			}
 		}
 	});
@@ -177,17 +182,18 @@ function removeExtname(filepath: string) {
 
 // 入口页面置顶
 // @ts-ignore
-function moveHomeToFirst(pages: string[]) {
-	const pagesCopy = pages
-	const homeObject = pages.filter((it) =>
-		/home|Home/.test(it)
-	);
+function moveHomeToFirst(pages: string[], entryPage?: string) {
+	const entryPageReg = entryPage
+		? new RegExp(`/home|Home|${entryPage}/`)
+		: new RegExp(`/home|Home/`);
+	const pagesCopy = pages;
+	const homeObject = pages.filter((it) => entryPageReg.test(it));
 	if (homeObject.length > 0) {
-		const homeIndex = pages.indexOf(homeObject[0] as string)
+		const homeIndex = pages.indexOf(homeObject[0] as string);
 		if (homeIndex !== 0) {
-			pagesCopy.splice(homeIndex,1)
+			pagesCopy.splice(homeIndex, 1);
 			pagesCopy.unshift(homeObject[0] as string);
 		}
 	}
-	return pagesCopy
+	return pagesCopy;
 }

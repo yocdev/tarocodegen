@@ -27,4 +27,4 @@ export const addToConfig = (configPart: any) => {
 	return { ...config, ...configPart };
 };
 
-export default config
+export default config;

@@ -1,4 +1,5 @@
 {
+	"routerEntry": "content",
 	"iconRoot": "./example/icons/source",
 	"iconTarget": "./example/icons",
 	"templateFile": "./.codegen/templates/icon.handlebars",

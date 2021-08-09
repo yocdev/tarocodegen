@@ -6,10 +6,11 @@ import readExtraConfig from "../util/readExtraConfig";
 const configSchema = {
 	type: "object",
 	properties: {
+		routerEntry: { type: "string" },
 		iconRoot: { type: "string" },
 		iconTarget: { type: "string" },
 		templateFile: { type: "string" },
-		prefix: {type: 'string'},
+		prefix: { type: "string" },
 		svgr: {
 			type: "object",
 			properties: {
