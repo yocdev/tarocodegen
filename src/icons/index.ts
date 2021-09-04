@@ -152,8 +152,8 @@ const svgrGenerator = async (fileDir: string, componentName: string) => {
 				svgo: true,
 				svgoConfig: {
 					plugins: [
-						{ removeTitle: true },
-						{ removeViewBox: true },
+						// { removeTitle: false },
+						// { removeViewBox: false },
 						{
 							cleanupIDs: {
 								prefix: `svg${hash(relative(context, svgCode))}`,
