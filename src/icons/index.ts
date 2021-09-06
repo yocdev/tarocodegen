@@ -6,10 +6,14 @@ import _ from "lodash";
 import prettier from "prettier";
 import svgr from "@svgr/core";
 import glob from "glob-promise";
-
+import hash from "string-hash";
 import readConfig from "../helper/readConfig";
 import chalk from "chalk";
 import { nodeEnv } from "../config/env";
+
+const { relative } = path;
+
+const context = __dirname;
 
 const config = readConfig();
 if (nodeEnv === "dev") {
@@ -144,6 +148,18 @@ const svgrGenerator = async (fileDir: string, componentName: string) => {
 					"#000": "{props.color}",
 					"#000000": "{props.color}",
 					currentColor: "{props.color}",
+				},
+				svgo: true,
+				svgoConfig: {
+					plugins: [
+						// { removeTitle: false },
+						// { removeViewBox: false },
+						{
+							cleanupIDs: {
+								prefix: `svg${hash(relative(context, svgCode))}`,
+							},
+						},
+					],
 				},
 				plugins: [
 					"@svgr/plugin-svgo",
