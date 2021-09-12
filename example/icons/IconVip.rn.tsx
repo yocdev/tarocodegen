@@ -3,7 +3,7 @@ import Svg, { Defs, LinearGradient, Stop, G, Rect, Path } from "react-native-svg
 
 function IconVip(props) {
   return (
-    <Svg xmlns="http://www.w3.org/2000/svg" {...props}>
+    <Svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" {...props}>
       <Defs>
         <LinearGradient x1="7.241%" y1="7.366%" x2="99.488%" y2="97.328%" id="prefix__svg3830786751a">
           <Stop stopColor="#FFE4AF" offset="0%" />

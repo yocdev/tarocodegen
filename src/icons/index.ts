@@ -10,6 +10,7 @@ import hash from "string-hash";
 import readConfig from "../helper/readConfig";
 import chalk from "chalk";
 import { nodeEnv } from "../config/env";
+import oneTemplate from "./template/one";
 
 const { relative } = path;
 
@@ -17,7 +18,7 @@ const context = __dirname;
 
 const config = readConfig();
 if (nodeEnv === "dev") {
-	console.log(config);
+	// console.log(config);
 }
 const commandPath = process.cwd();
 export default function generateIcons() {
@@ -138,6 +139,10 @@ const svgrGenerator = async (fileDir: string, componentName: string) => {
 
 	// TODO: 读取文件数据
 	const svgCode = fs.readFileSync(fileDir, "utf-8");
+	svgr(svgCode, {
+		template: oneTemplate,
+		native: true,
+	}).then((code: string) => console.log(code));
 	config.svgr.platform.forEach((platform: string) => {
 		svgr(
 			svgCode,
