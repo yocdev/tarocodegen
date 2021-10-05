@@ -11,6 +11,7 @@ function oneTemplate(
 		plugins.push("typescript");
 	}
 	const typescriptTpl = template.smart({ plugins });
+
 	const rnRequireAst = parse(`const Svg = require('react-native-svg');
 	const {Path} = Svg;`);
 	console.log(rnRequireAst);
